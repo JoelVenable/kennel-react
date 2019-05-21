@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ownerData } from '../../data/ownerData';
 
 export class EmployeeList extends Component {
   render() {
