@@ -14,7 +14,9 @@ const endpoints = {
 export const API = {
   animals: {
     fetch: (id) => endpoints.animals.read(id),
-    delete: (id) => endpoints.animals.delete(id)
+    fetchWithLocation: (locationId) => endpoints.animals.read(`?locationId=${locationId}`),
+    delete: (id) => endpoints.animals.delete(id),
+    add: (newAnimal) => endpoints.animals.create(newAnimal)
   },
   animalOwners: {
     fetch: (id) => endpoints.animalOwners.read(id),
