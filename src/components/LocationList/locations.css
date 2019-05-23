@@ -1,0 +1,16 @@
+.location-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.location-details {
+  flex-grow: 2;
+
+}
+
+.location-detailsInner {
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
