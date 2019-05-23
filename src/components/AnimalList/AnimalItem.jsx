@@ -1,39 +1,45 @@
 import React, { Component } from "react";
-import { API } from '../../modules/API';
-
+import dog from "./DogIcon.svg";
+import { Link } from "react-router-dom";
 
 export class AnimalItem extends Component {
   state = {
-    owners: []
+    isDeleteButtonDisabled: false,
   }
 
 
-  componentDidMount() {
-    this.getOwners(this.props.animal.id);
+  getDogImage() {
+    return `https://loremflickr.com/320/240/dog?random=${this.props.animal.id}`
   }
+
 
   handleClick = (event) => {
+    this.setState({ isButtonDisabled: true });
     this.props.deleteAnimal(this.props.animal.id)
   }
 
-  getOwners = (animalId) => {
-    API.animalOwners.fetchOwnerFromAnimalId(animalId)
-      .then(animalOwners => animalOwners.map(animalOwner => animalOwner.owner))
-      .then(owners => this.setState({ owners }))
-  }
 
   render() {
     return (
-      <article>
-        <h4>Name: {this.props.animal.name}</h4>
-        <p>Breed: {this.props.animal.breed}</p>
-        <p>Owners:</p>
-        <ul>
-          {this.state.owners.map(owner => <li>{owner.first_name} {owner.last_name}</li>)}
-        </ul>
-        <button onClick={this.handleClick}>Delete this animal</button>
+      <article key={this.props.animal.id} className="card card-list">
+        <div className="card-body">
+          <div className="card-image">
+            <img src={this.getDogImage()} className="icon-dog" />
+          </div>
+
+          <div className="card-title">
+            <h4>{this.props.animal.name}</h4>
+          </div>
+          <p>{this.props.animal.breed}</p>
+          <div className="card-buttonContainer">
+
+            <button disabled={this.state.isDeleteButtonDisabled} onClick={this.handleClick}>Delete this animal</button>
+            <Link className="nav-link" to={`/animals/${this.props.animal.id}`}>Details</Link>
+          </div>
+        </div>
       </article>
     )
   }
 }
+
 
